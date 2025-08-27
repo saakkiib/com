@@ -5,63 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sadman Sakib | Portfolio</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Navbar -->
   <nav>
-    <h1>🚀 Sadman Sakib</h1>
+    <h1 class="logo">🚀 Sadman Sakib</h1>
     <ul>
+      <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#blog">Blog</a></li>
+      <li><a href="#files">Files</a></li>
+      <li><a href="#watch">Clock</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button id="modeToggle">🌙</button>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section id="hero">
-    <h2>Welcome to my website! 👋</h2>
+    <h2 class="typing">Welcome to my world of code 👨‍💻</h2>
     <p>I share my coding journey, projects, and learning experiences here.</p>
+    <a href="#projects" class="btn">See My Projects</a>
   </section>
 
   <!-- About -->
-  <section id="about">
+  <section id="about" class="fade-in">
     <h2>About Me</h2>
-    <img src="profile.jpg" alt="My Photo" width="150">
-    <p>I’m a passionate coder learning new things every day!</p>
+    <img src="profile.jpg" alt="My Photo" width="150" class="profile">
+    <p>Hello! I’m <b>Sadman Sakib</b>, a passionate coder. Always learning and building new things 🚀</p>
   </section>
 
   <!-- Projects -->
-  <section id="projects">
+  <section id="projects" class="fade-in">
     <h2>Projects</h2>
-    <div class="card">
-      <h3>Project1p</h3>
-      <p>A simple app to check weather.</p>
-      <a href="https://github.com/yourusername/project1" target="_blank">View Code</a>
-    </div>
-    <div class="card">
-      <h3>Project2</h3>
-      <p>Manage your daily tasks easily.</p>
-      <a href="https://github.com/yourusername/project2" target="_blank">View Code</a>
+    <div class="project-grid">
+      <div class="card">
+        <h3>Project 1</h3>
+        <p>A web app demo.</p>
+        <a href="#">View Code</a>
+      </div>
+      <div class="card">
+        <h3>Project 2</h3>
+        <p>A mobile app demo.</p>
+        <a href="#">View Code</a>
+      </div>
+      <div class="card">
+        <h3>Project 3</h3>
+        <p>Another awesome project.</p>
+        <a href="#">View Code</a>
+      </div>
     </div>
   </section>
 
-  <!-- Blog -->
-  <section id="blog">
-    <h2>Latest Blog</h2>
-    <p>Coming soon...</p>
+  <!-- File Storage -->
+  <section id="files" class="fade-in">
+    <h2>📂 My Files</h2>
+    <p>Download my uploaded files here:</p>
+    <ul>
+      <li><a href="files/sample.pdf" download>Download Sample File</a></li>
+      <li><a href="files/project.zip" download>Download Project ZIP</a></li>
+    </ul>
+  </section>
+
+  <!-- Digital Watch -->
+  <section id="watch" class="fade-in">
+    <h2>🕒 Digital Clock</h2>
+    <div id="clock"></div>
+    <div id="day"></div>
   </section>
 
   <!-- Contact -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <a href="mailto:s.sakib01316448433@gmail.com">📧 Email</a> |
-    <a href="https://github.com/saakkiib">GitHub</a> |
-    <a href="https://www.facebook.com/ssaakiibb">facebook</a>
+  <section id="contact" class="fade-in">
+    <h2>📬 Contact Me</h2>
+    <p>Email: <a href="mailto:s.sakib01316448433@gmail.com">s.sakib01316448433@gmail.com</a></p>
+    <p>Mobile: <a href="tel:01316448433">01316448433</a></p>
+    <div class="socials">
+      <a href="https://github.com/saakkiib" target="_blank">GitHub</a>
+      <a href="https://www.facebook.com/ssaakiibb" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/___ssakib___/" target="_blank">Instagram</a>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 Sadman Sakib | Built with ❤️ and GitHub Pages</p>
+    <p>© 2025 Sadman Sakib | Built with ❤️ using GitHub Pages</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

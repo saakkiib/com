@@ -1,15 +1,23 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  background: #f9f9f9;
+  color: #333;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* Navbar */
 nav {
   display: flex;
   justify-content: space-between;
-  background: #111;
-  padding: 10px 20px;
+  align-items: center;
+  background: #222;
+  padding: 15px 20px;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 nav ul {
@@ -21,25 +29,142 @@ nav ul {
 nav a {
   text-decoration: none;
   color: white;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-section {
-  padding: 40px;
+nav a:hover {
+  color: #00c3ff;
+}
+
+#modeToggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Hero */
+#hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, #00c3ff, #6600ff);
+  color: white;
   text-align: center;
+  animation: fadeIn 2s ease;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: white;
+  color: #222;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #222;
+  color: white;
+}
+
+/* About */
+.profile {
+  border-radius: 50%;
+  margin: 20px 0;
+}
+
+/* Projects */
+.project-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .card {
-  border: 1px solid #ddd;
+  border: none;
   padding: 20px;
-  margin: 10px;
-  border-radius: 10px;
-  display: inline-block;
-  width: 200px;
+  width: 220px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Clock */
+#clock {
+  font-size: 48px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+#day {
+  font-size: 20px;
+  color: #666;
+}
+
+/* Footer */
 footer {
-  background: #111;
+  background: #222;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.typing {
+  border-right: 3px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3s steps(30) forwards, blink 0.7s infinite;
+  width: 0;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Dark Mode */
+body.dark {
+  background: #1a1a1a;
+  color: #ddd;
+}
+
+body.dark nav {
+  background: #111;
+}
+
+body.dark .card {
+  background: #222;
+  color: #fff;
 }
