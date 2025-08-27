@@ -1,53 +1,108 @@
-// Matrix background effect
+/* ========= Matrix Background ========= */
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
-
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+function sizeCanvas(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+sizeCanvas(); addEventListener('resize', sizeCanvas);
 
 const letters = "01";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
+let fontSize = 14;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = Array.from({length: columns}, () => 1);
 
-for (let x = 0; x < columns; x++) drops[x] = 1;
-
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+function drawMatrix(){
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle = "#0f0";
   ctx.font = fontSize + "px monospace";
-
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters.charAt(Math.floor(Math.random() * letters.length));
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
-      drops[i] = 0;
-
+  for (let i=0;i<drops.length;i++){
+    const text = letters[Math.floor(Math.random()*letters.length)];
+    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+    if (drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
     drops[i]++;
   }
 }
-setInterval(drawMatrix, 35);
+setInterval(drawMatrix, 33);
 
-// Matrix Clock
-function updateClock() {
-  let now = new Date();
-  let hours = now.getHours().toString().padStart(2, '0');
-  let minutes = now.getMinutes().toString().padStart(2, '0');
-  let seconds = now.getSeconds().toString().padStart(2, '0');
-  let date = now.toDateString();
-
-  document.getElementById("matrixClock").innerText = `${hours}:${minutes}:${seconds}`;
-  document.getElementById("matrixDate").innerText = date;
+/* ========= Fake Hacker Code Stream ========= */
+const codeStream = document.getElementById('code-stream');
+const codeLines = [
+  "npm run deploy",
+  "git push origin main",
+  "gcc main.c -O2",
+  "pip install --upgrade life",
+  "ssh root@matrix",
+  "Decrypting payload...",
+  "Access granted.",
+  "SELECT * FROM skills WHERE dev='Sadman'",
+  "curl -s https://api"
+];
+function spawnLine(){
+  const el = document.createElement('div');
+  el.textContent = codeLines[Math.floor(Math.random()*codeLines.length)];
+  el.style.position = 'absolute';
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.top = '100vh';
+  el.style.color = 'rgba(0,255,163,.8)';
+  el.style.font = '12px monospace';
+  el.style.textShadow = '0 0 8px rgba(0,255,163,.8)';
+  el.style.transform = 'translateY(0)';
+  el.style.transition = 'transform 4s linear, opacity 4s linear';
+  codeStream.appendChild(el);
+  requestAnimationFrame(()=>{
+    el.style.transform = 'translateY(-110vh)';
+    el.style.opacity = '0';
+  });
+  setTimeout(()=>el.remove(), 4200);
 }
-setInterval(updateClock, 1000);
-updateClock();
+setInterval(spawnLine, 300);
 
-// Dark Mode Toggle
-document.getElementById("modeToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  document.getElementById("modeToggle").innerText =
-    document.body.classList.contains("dark") ? "☀️" : "🌙";
+/* ========= Neon Clock ========= */
+function updateClock(){
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-GB', {hour12:false});
+  const date = now.toLocaleDateString('en-GB', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  document.getElementById('matrixClock').textContent = time;
+  document.getElementById('matrixDate').textContent = date;
+}
+setInterval(updateClock, 1000); updateClock();
+
+/* ========= Theme Toggle ========= */
+const modeBtn = document.getElementById('modeToggle');
+modeBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('light');
+  modeBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
 });
+
+/* ========= Reveal on Scroll ========= */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('is-visible'); })
+},{threshold:.12});
+revealEls.forEach(el=>io.observe(el));
+
+/* ========= Entry Overlay ========= */
+const overlay = document.getElementById('entry-overlay');
+const enterBtn = document.getElementById('enterBtn');
+function portalOut(){
+  overlay.style.transition = 'opacity .9s ease, transform .9s ease';
+  overlay.style.transform = 'scale(1.06)';
+  overlay.style.opacity = '0';
+  setTimeout(()=> overlay.style.display='none', 900);
+}
+enterBtn.addEventListener('click', portalOut);
+
+/* ========= Buttons Ripple Position ========= */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('click',(e)=>{
+    const rect = btn.getBoundingClientRect();
+    btn.style.setProperty('--x', (e.clientX - rect.left) + 'px');
+    btn.style.setProperty('--y', (e.clientY - rect.top) + 'px');
+  });
+});
+
+/* ========= Fight Stage Toggle ========= */
+const showFight = document.getElementById('showFight');
+const hideFight = document.getElementById('hideFight');
+const fight = document.getElementById('fight');
+showFight.addEventListener('click', ()=> fight.classList.remove('hidden'));
+hideFight.addEventListener('click', ()=> fight.classList.add('hidden'));
