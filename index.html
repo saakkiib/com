@@ -5,12 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sadman Sakib | Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- Matrix Background -->
+  <canvas id="matrix"></canvas>
+
   <!-- Navbar -->
   <nav>
-    <h1 class="logo">🚀 Sadman Sakib</h1>
+    <div class="brand">
+      <img src="profile.jpg" alt="My Photo" class="logo-img">
+      <h1>🚀 Sadman Sakib</h1>
+    </div>
     <ul>
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -23,7 +28,7 @@
   </nav>
 
   <!-- Hero -->
-  <section id="hero">
+  <section id="hero" class="fade-in">
     <h2 class="typing">Welcome to my world of code 👨‍💻</h2>
     <p>I share my coding journey, projects, and learning experiences here.</p>
     <a href="#projects" class="btn">See My Projects</a>
@@ -32,7 +37,6 @@
   <!-- About -->
   <section id="about" class="fade-in">
     <h2>About Me</h2>
-    <img src="profile.jpg" alt="My Photo" width="150" class="profile">
     <p>Hello! I’m <b>Sadman Sakib</b>, a passionate coder. Always learning and building new things 🚀</p>
   </section>
 
@@ -40,19 +44,14 @@
   <section id="projects" class="fade-in">
     <h2>Projects</h2>
     <div class="project-grid">
-      <div class="card">
+      <div class="card bounce">
         <h3>Project 1</h3>
         <p>A web app demo.</p>
         <a href="#">View Code</a>
       </div>
-      <div class="card">
+      <div class="card bounce">
         <h3>Project 2</h3>
         <p>A mobile app demo.</p>
-        <a href="#">View Code</a>
-      </div>
-      <div class="card">
-        <h3>Project 3</h3>
-        <p>Another awesome project.</p>
         <a href="#">View Code</a>
       </div>
     </div>
@@ -61,18 +60,17 @@
   <!-- File Storage -->
   <section id="files" class="fade-in">
     <h2>📂 My Files</h2>
-    <p>Download my uploaded files here:</p>
     <ul>
       <li><a href="files/sample.pdf" download>Download Sample File</a></li>
       <li><a href="files/project.zip" download>Download Project ZIP</a></li>
     </ul>
   </section>
 
-  <!-- Digital Watch -->
+  <!-- Matrix Digital Clock -->
   <section id="watch" class="fade-in">
-    <h2>🕒 Digital Clock</h2>
-    <div id="clock"></div>
-    <div id="day"></div>
+    <h2>🕒 Matrix Clock</h2>
+    <div id="matrixClock"></div>
+    <div id="matrixDate"></div>
   </section>
 
   <!-- Contact -->
