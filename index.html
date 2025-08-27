@@ -3,92 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sadman Sakib | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Sadman Sakib | CSE Student Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Orbitron', monospace;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    /* Glassmorphism Center Container */
+    .glass {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px auto;
+      width: 80%;
+      max-width: 900px;
+      box-shadow: 0 0 25px rgba(0,255,100,0.5);
+    }
+
+    h1 {
+      font-size: 45px;
+      text-shadow: 0 0 15px #0f0, 0 0 30px #0f0;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 28px;
+      margin: 20px 0;
+      text-shadow: 0 0 10px cyan;
+    }
+
+    /* Neon Clock */
+    #matrixClock {
+      font-size: 90px;
+      color: #00ff99;
+      text-shadow: 0 0 20px #00ff99, 0 0 40px #00cc88, 0 0 60px #009966;
+      animation: pulse 2s infinite;
+    }
+    #matrixDate {
+      font-size: 25px;
+      color: #66ffcc;
+      text-shadow: 0 0 10px #33ffaa;
+      margin-top: 10px;
+      animation: flicker 3s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 20px #00ff99, 0 0 40px #00cc88; }
+      50% { text-shadow: 0 0 40px #00ffcc, 0 0 80px #00ff99; }
+    }
+    @keyframes flicker {
+      0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; }
+    }
+
+    /* Links */
+    a {
+      color: #0ff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    a:hover { color: #0f0; text-shadow: 0 0 10px #0f0; }
+
+    /* Buttons ripple */
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: #0ff;
+      font-family: inherit;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    button::after {
+      content: "";
+      position: absolute;
+      width: 10px; height: 10px;
+      background: rgba(0,255,200,0.6);
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.6s, opacity 1s;
+    }
+    button:active::after {
+      transform: scale(15);
+      opacity: 1;
+      left: var(--x);
+      top: var(--y);
+    }
+
+    /* Hacker console text */
+    .hacker-line {
+      position: fixed;
+      left: 20px;
+      bottom: 0;
+      color: #0f0;
+      font-size: 14px;
+      opacity: 0.8;
+      animation: slideUp 4s linear forwards;
+      font-family: monospace;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-300px); opacity: 0; }
+    }
+
+    /* Matrix rain canvas */
+    canvas#matrix { 
+      position: fixed; 
+      top:0; left:0; 
+      width:100%; height:100%; 
+      z-index:-1; 
+      background:#000;
+    }
+  </style>
 </head>
 <body>
-  <!-- Matrix Background -->
+
+  <!-- Matrix Rain -->
   <canvas id="matrix"></canvas>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="brand">
-      <img src="profile.jpg" alt="My Photo" class="logo-img">
-      <h1>🚀 Sadman Sakib</h1>
-    </div>
-    <ul>
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#files">Files</a></li>
-      <li><a href="#watch">Clock</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button id="modeToggle">🌙</button>
-  </nav>
+  <div class="glass">
+    <h1>👨‍💻 Sadman Sakib</h1>
+    <img src="profile.jpg" alt="My Photo" width="150" style="border-radius:50%; margin:15px;">
+    <h2>CSE Student | Future Hacker 💻</h2>
 
-  <!-- Hero -->
-  <section id="hero" class="fade-in">
-    <h2 class="typing">Welcome to my world of code 👨‍💻</h2>
-    <p>I share my coding journey, projects, and learning experiences here.</p>
-    <a href="#projects" class="btn">See My Projects</a>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="fade-in">
-    <h2>About Me</h2>
-    <p>Hello! I’m <b>Sadman Sakib</b>, a passionate coder. Always learning and building new things 🚀</p>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="fade-in">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="card bounce">
-        <h3>Project 1</h3>
-        <p>A web app demo.</p>
-        <a href="#">View Code</a>
-      </div>
-      <div class="card bounce">
-        <h3>Project 2</h3>
-        <p>A mobile app demo.</p>
-        <a href="#">View Code</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- File Storage -->
-  <section id="files" class="fade-in">
-    <h2>📂 My Files</h2>
-    <ul>
-      <li><a href="files/sample.pdf" download>Download Sample File</a></li>
-      <li><a href="files/project.zip" download>Download Project ZIP</a></li>
-    </ul>
-  </section>
-
-  <!-- Matrix Digital Clock -->
-  <section id="watch" class="fade-in">
-    <h2>🕒 Matrix Clock</h2>
+    <!-- Clock -->
     <div id="matrixClock"></div>
     <div id="matrixDate"></div>
-  </section>
 
-  <!-- Contact -->
-  <section id="contact" class="fade-in">
-    <h2>📬 Contact Me</h2>
-    <p>Email: <a href="mailto:s.sakib01316448433@gmail.com">s.sakib01316448433@gmail.com</a></p>
-    <p>Mobile: <a href="tel:01316448433">01316448433</a></p>
-    <div class="socials">
-      <a href="https://github.com/saakkiib" target="_blank">GitHub</a>
-      <a href="https://www.facebook.com/ssaakiibb" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/___ssakib___/" target="_blank">Instagram</a>
-    </div>
-  </section>
+    <!-- Projects -->
+    <h2>🚀 Projects</h2>
+    <p><a href="#">Project 1</a></p>
+    <p><a href="#">Project 2</a></p>
 
-  <footer>
-    <p>© 2025 Sadman Sakib | Built with ❤️ using GitHub Pages</p>
-  </footer>
+    <!-- Files -->
+    <h2>📂 My Files</h2>
+    <p><a href="files/sample.pdf" download>Download Sample PDF</a></p>
+    <p><a href="files/project.zip" download>Download Project ZIP</a></p>
 
-  <script src="script.js"></script>
+    <!-- Contact -->
+    <h2>📬 Contact</h2>
+    <p>📧 <a href="mailto:s.sakib01316448433@gmail.com">s.sakib01316448433@gmail.com</a></p>
+    <p>📱 01316448433</p>
+    <p>
+      <a href="https://github.com/saakkiib">GitHub</a> |
+      <a href="https://www.facebook.com/ssaakiibb">Facebook</a> |
+      <a href="https://www.instagram.com/___ssakib___/">Instagram</a>
+    </p>
+
+    <!-- Mode Switch -->
+    <button onclick="toggleTheme(event)">🌙 Toggle Night Mode</button>
+  </div>
+
+  <script>
+    /* Matrix Rain */
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const chars = "01";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0,0,0,0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0f0";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 33);
+
+    /* Clock + Date */
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("matrixClock").textContent =
+        now.toLocaleTimeString('en-GB', {hour12:false});
+      document.getElementById("matrixDate").textContent =
+        now.toLocaleDateString('en-GB', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    /* Ripple effect */
+    document.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", function(e){
+        let x = e.clientX - e.target.offsetLeft;
+        let y = e.clientY - e.target.offsetTop;
+        e.target.style.setProperty("--x", x+"px");
+        e.target.style.setProperty("--y", y+"px");
+      });
+    });
+
+    /* Hacker console text */
+    const hackerText = [
+      "Initializing system...",
+      "Loading AI modules...",
+      "Accessing database...",
+      "Decrypting files...",
+      "Hack successful!",
+      "User: Sadman Sakib",
+      "CSE Student Portfolio"
+    ];
+    function hackerConsole() {
+      const elem = document.createElement("div");
+      elem.classList.add("hacker-line");
+      elem.innerText = hackerText[Math.floor(Math.random() * hackerText.length)];
+      document.body.appendChild(elem);
+      setTimeout(() => elem.remove(), 4000);
+    }
+    setInterval(hackerConsole, 1000);
+
+    /* Dark / Light Mode */
+    function toggleTheme(e){
+      document.body.classList.toggle("light");
+      if(document.body.classList.contains("light")){
+        document.body.style.background = "#eee";
+        document.body.style.color = "#111";
+      } else {
+        document.body.style.background = "#000";
+        document.body.style.color = "#fff";
+      }
+    }
+  </script>
 </body>
 </html>
