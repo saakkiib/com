@@ -92,12 +92,47 @@
     </section>
 
     <!-- Files -->
-    <section id="files" class="section glass center reveal">
-      <h2 class="section-title">My Files</h2>
-      <ul class="file-list">
-        <li><a href="files" download class="file-link">PDF</a></li>
-        <li><a href="files" download class="file-link">ZIP</a></li>
-      </ul>
+<section id="files" class="section glass center reveal">
+  <h2 class="section-title">📂 My Files</h2>
+  <ul id="file-list" class="file-list">
+    <li>Loading files...</li>
+  </ul>
+</section>
+
+<script>
+  const username = "saakkiib";   // তোমার GitHub username
+  const repo = "com";           // repo নাম
+  const branch = "main";        // branch নাম
+  const folder = "files";       // folder নাম
+
+  async function loadFiles() {
+    const url = `https://api.github.com/repos/${username}/${repo}/contents/${folder}?ref=${branch}`;
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const fileList = document.getElementById("file-list");
+      fileList.innerHTML = "";
+
+      data.forEach(file => {
+        if (file.type === "file") {
+          // raw link বানাচ্ছি
+          const rawUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${folder}/${file.name}`;
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <a href="${rawUrl}" download class="file-link">⬇️ ${file.name}</a> 
+            | <a href="${file.html_url}" target="_blank">👀 View</a>
+          `;
+          fileList.appendChild(li);
+        }
+      });
+    } catch (error) {
+      console.error("Error loading files:", error);
+      document.getElementById("file-list").innerHTML = "<li>❌ Could not load files</li>";
+    }
+  }
+
+  loadFiles();
+</script>
      
 
     <!-- Contact -->
