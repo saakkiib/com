@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
 // Visitor Counter
-fetch('https://api.countapi.xyz/hit/ssakib-portfolio/visits')
+fetch('https://api.countapi.xyz/hit/ssakib-Emni/visits')
   .then(res => res.json())
   .then(res => {
     if (res && res.value !== undefined) {
