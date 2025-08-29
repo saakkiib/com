@@ -166,3 +166,34 @@ main{width:min(96vw,1100px); margin:20px auto 80px}
   left:var(--x,50%); top:var(--y,50%); transition:transform .6s, opacity .9s;
 }
 .btn:active::after{transform:scale(18); opacity:1}
+.about-line {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 18px;
+  color: #eee;
+  font-family: 'Poppins', monospace;
+  letter-spacing: 1px;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  color: #00ffcc;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#typing-text {
+  color: #00ffcc;
+  text-shadow: 0 0 8px #00ffcc, 0 0 15px #008877;
+}
