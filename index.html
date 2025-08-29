@@ -160,10 +160,61 @@
     <p>© 2025 Sadman Sakib • Built with ❤️ & GitHub Pages</p>
   </footer>
 
- <section id="visitors" class="about-line">
-  👀 Visitors: <span id="visitor-count">0</span><br>
-  🌍 Last Visitor From: <span id="visitor-country">Unknown</span>
-</section>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Counter Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f0f0f0;
+    }
+    .counter {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to My Portfolio</h1>
+
+  <div class="counter">
+    Visitors: <span id="visitor-count">0</span>
+  </div>
+  <div class="counter">
+    Last Visitor From: <span id="visitor-country">Loading...</span>
+  </div>
+
+  <script>
+    // Visitor Counter using CountAPI
+    fetch('https://api.countapi.xyz/hit/saakkiib-portfolio/visits')
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById('visitor-count').innerText = res.value || 0;
+      })
+      .catch(err => {
+        console.log("CountAPI error:", err);
+        document.getElementById('visitor-count').innerText = "0";
+      });
+
+    // Visitor Country using IPAPI
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('visitor-country').innerText = data.country_name || "Unknown";
+      })
+      .catch(() => {
+        document.getElementById('visitor-country').innerText = "Unknown";
+      });
+  </script>
+
+</body>
+</html>
 
   <script src="script.js"></script>
   <script src="animations.js"></script>
