@@ -147,19 +147,19 @@ function erase() {
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
-// Visitor Counter
+// শুরুতে ভিজিট সংখ্যা
+let initialCount = 23304;
+
 fetch('https://abacus.jasoncameron.dev/hit/sakib-emni/key')
   .then(res => res.json())
   .then(res => {
-    if (res && res.value !== undefined) {
-      document.getElementById('visitor-count').innerText = res.value;
-    } else {
-      document.getElementById('visitor-count').innerText = "23304";
-    }
+    // API value + শুরু মান
+    let total = initialCount + (res.value || 0);
+    document.getElementById('visitor-count').innerText = total;
   })
   .catch(err => {
     console.log("CountAPI error:", err);
-    document.getElementById('visitor-count').innerText = "23304";
+    document.getElementById('visitor-count').innerText = initialCount;
   });
 
 // IP Geolocation
