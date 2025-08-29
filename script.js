@@ -106,3 +106,44 @@ const hideFight = document.getElementById('hideFight');
 const fight = document.getElementById('fight');
 showFight.addEventListener('click', ()=> fight.classList.remove('hidden'));
 hideFight.addEventListener('click', ()=> fight.classList.add('hidden'));
+const aboutText = [
+  "🎓 BSc in Computer Science at United International University",
+  "📘 HSC (Science): Rajshahi New Govt Degree College",
+  "🏫 SSC (Science): Mohadevpur SM High School",
+  "📍 Currently living in Dhaka",
+  "🏡 Hometown: Naogaon, Rajshahi"
+];
+
+let textIndex = 0;
+let charIndex = 0;
+const typingSpeed = 60;
+const erasingSpeed = 40;
+const delayBetween = 1200;
+
+const typingElement = document.getElementById("typing-text");
+
+function type() {
+  if (charIndex < aboutText[textIndex].length) {
+    typingElement.textContent += aboutText[textIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(type, typingSpeed);
+  } else {
+    setTimeout(erase, delayBetween);
+  }
+}
+
+function erase() {
+  if (charIndex > 0) {
+    typingElement.textContent = aboutText[textIndex].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(erase, erasingSpeed);
+  } else {
+    textIndex++;
+    if (textIndex >= aboutText.length) textIndex = 0;
+    setTimeout(type, typingSpeed);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(type, delayBetween);
+});
