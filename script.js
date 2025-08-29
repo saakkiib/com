@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
 // Visitor Counter
-fetch('https://abacus.jasoncameron.dev/hit/namespace/key')
+fetch('https://abacus.jasoncameron.dev/hit/sakib-emni/key')
   .then(res => res.json())
   .then(res => {
     if (res && res.value !== undefined) {
