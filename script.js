@@ -150,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
 let initialCount = 23304;
 let lastCount = initialCount;
 
-async function updateVisitor() {
-  // Visitor Counter
+// শুধু page load এ API call
+async function updateVisitorOnce() {
   try {
     const res = await fetch('https://abacus.jasoncameron.dev/hit/sakib-emni/key');
     const data = await res.json();
@@ -159,16 +159,19 @@ async function updateVisitor() {
     const total = initialCount + apiValue;
 
     const visitorEl = document.getElementById('visitor-count');
+    visitorEl.innerText = total;
+    visitorEl.setAttribute('data-text', total);
+    lastCount = total;
 
-    if (total > lastCount) {
-      visitorEl.innerText = total;
-      visitorEl.classList.add('increase');
-      setTimeout(() => visitorEl.classList.remove('increase'), 500);
-      lastCount = total;
-    }
+    // Animate on first update
+    visitorEl.classList.add('increase');
+    setTimeout(() => visitorEl.classList.remove('increase'), 500);
+
   } catch (err) {
     console.log("CountAPI error:", err);
-    document.getElementById('visitor-count').innerText = lastCount;
+    const visitorEl = document.getElementById('visitor-count');
+    visitorEl.innerText = lastCount;
+    visitorEl.setAttribute('data-text', lastCount);
   }
 
   // Country update
@@ -182,8 +185,5 @@ async function updateVisitor() {
   }
 }
 
-// প্রথমবার লোড
-updateVisitor();
-
-// প্রতি 10 সেকেন্ডে check করে যদি নতুন visitor আসে update হবে
-setInterval(updateVisitor, 10000);
+// প্রথমবার page load এ একবার run
+updateVisitorOnce();
