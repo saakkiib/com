@@ -197,3 +197,16 @@ main{width:min(96vw,1100px); margin:20px auto 80px}
   color: #00ffcc;
   text-shadow: 0 0 8px #00ffcc, 0 0 15px #008877;
 }
+#visitors {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 18px;
+  color: #00ffcc;
+  text-shadow: 0 0 8px #00ffcc, 0 0 15px #008877;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
