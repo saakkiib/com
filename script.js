@@ -147,19 +147,26 @@ function erase() {
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
-// Visitor Counter with Location
-// CountAPI দিয়ে Counter
+// Visitor Counter
 fetch('https://api.countapi.xyz/hit/ssakib-portfolio/visits')
   .then(res => res.json())
   .then(res => {
-    document.getElementById('visitor-count').innerText = res.value;
+    if (res && res.value !== undefined) {
+      document.getElementById('visitor-count').innerText = res.value;
+    } else {
+      document.getElementById('visitor-count').innerText = "0";
+    }
+  })
+  .catch(err => {
+    console.log("CountAPI error:", err);
+    document.getElementById('visitor-count').innerText = "0";
   });
 
-// IP Geolocation API দিয়ে Country show
+// IP Geolocation
 fetch('https://ipapi.co/json/')
   .then(res => res.json())
   .then(data => {
-    document.getElementById('visitor-country').innerText = data.country_name;
+    document.getElementById('visitor-country').innerText = data.country_name || "Unknown";
   })
   .catch(() => {
     document.getElementById('visitor-country').innerText = "Unknown";
