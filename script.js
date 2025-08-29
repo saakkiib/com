@@ -147,27 +147,22 @@ function erase() {
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
-// শুরুতে ভিজিট সংখ্যা
 let initialCount = 23304;
 
-fetch('https://abacus.jasoncameron.dev/hit/sakib-emni/key')
-  .then(res => res.json())
-  .then(res => {
-    // API value + শুরু মান
-    let total = initialCount + (res.value || 0);
-    document.getElementById('visitor-count').innerText = total;
-  })
-  .catch(err => {
-    console.log("CountAPI error:", err);
-    document.getElementById('visitor-count').innerText = initialCount;
-  });
+function updateVisitor() {
+  fetch('https://abacus.jasoncameron.dev/hit/sakib-emni/key')
+    .then(res => res.json())
+    .then(res => {
+      let total = initialCount + (res.value || 0);
+      document.getElementById('visitor-count').innerText = total;
+    })
+    .catch(() => {
+      document.getElementById('visitor-count').innerText = initialCount;
+    });
+}
 
-// IP Geolocation
-fetch('https://ipapi.co/json/')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('visitor-country').innerText = data.country_name || "Unknown";
-  })
-  .catch(() => {
-    document.getElementById('visitor-country').innerText = "Unknown";
-  });
+// প্রথমবার লোড
+updateVisitor();
+
+// প্রতি 30 সেকেন্ডে আপডেট হবে
+setInterval(updateVisitor, 30000);
