@@ -147,3 +147,20 @@ function erase() {
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
+// Visitor Counter with Location
+// CountAPI দিয়ে Counter
+fetch('https://api.countapi.xyz/hit/ssakib-portfolio/visits')
+  .then(res => res.json())
+  .then(res => {
+    document.getElementById('visitor-count').innerText = res.value;
+  });
+
+// IP Geolocation API দিয়ে Country show
+fetch('https://ipapi.co/json/')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('visitor-country').innerText = data.country_name;
+  })
+  .catch(() => {
+    document.getElementById('visitor-country').innerText = "Unknown";
+  });
