@@ -148,24 +148,33 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(type, delayBetween);
 });
 let initialCount = 23304;
+let lastCount = initialCount;
 
 async function updateVisitor() {
   // Visitor Counter
   try {
     const res = await fetch('https://abacus.jasoncameron.dev/hit/sakib-emni/key');
     const data = await res.json();
-    const total = initialCount + (data.value || 0);
-    document.getElementById('visitor-count').innerText = total;
+    const apiValue = data.value || 0;
+    const total = initialCount + apiValue;
+
+    const visitorEl = document.getElementById('visitor-count');
+
+    if (total > lastCount) {
+      visitorEl.innerText = total;
+      visitorEl.classList.add('increase');
+      setTimeout(() => visitorEl.classList.remove('increase'), 500);
+      lastCount = total;
+    }
   } catch (err) {
     console.log("CountAPI error:", err);
-    document.getElementById('visitor-count').innerText = initialCount;
+    document.getElementById('visitor-count').innerText = lastCount;
   }
 
-  // IP Geolocation
+  // Country update
   try {
     const geoRes = await fetch('https://ipapi.co/json/');
     const geoData = await geoRes.json();
-    console.log(geoData); // Debug: Country ঠিক আসছে কিনা চেক করতে
     document.getElementById('visitor-country').innerText = geoData.country_name || "Unknown";
   } catch (err) {
     console.log("IPAPI error:", err);
@@ -176,5 +185,5 @@ async function updateVisitor() {
 // প্রথমবার লোড
 updateVisitor();
 
-// প্রতি 10 সেকেন্ডে আপডেট হবে
+// প্রতি 10 সেকেন্ডে check করে যদি নতুন visitor আসে update হবে
 setInterval(updateVisitor, 10000);
