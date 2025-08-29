@@ -59,7 +59,7 @@ setInterval(spawnLine, 300);
 /* ========= Neon Clock ========= */
 function updateClock(){
   const now = new Date();
-  const time = now.toLocaleTimeString('en-GB', {hour12:false});
+  const time = now.toLocaleTimeString('en-GB', {hour12:true});
   const date = now.toLocaleDateString('en-GB', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
   document.getElementById('matrixClock').textContent = time;
   document.getElementById('matrixDate').textContent = date;
