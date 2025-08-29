@@ -107,7 +107,7 @@ const fight = document.getElementById('fight');
 showFight.addEventListener('click', ()=> fight.classList.remove('hidden'));
 hideFight.addEventListener('click', ()=> fight.classList.add('hidden'));
 const aboutText = [
-  "🎓 BSc in Computer Science at United International University",
+  "🎓 BSc in Computer Science at United International University (Studying)",
   "📘 HSC (Science): Rajshahi New Govt Degree College",
   "🏫 SSC (Science): Mohadevpur SM High School",
   "📍 Currently living in Dhaka",
