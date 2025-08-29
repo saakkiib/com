@@ -1,27 +1,42 @@
 /* ========= Matrix Background ========= */
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
-function sizeCanvas(){ canvas.width = innerWidth; canvas.height = innerHeight; }
-sizeCanvas(); addEventListener('resize', sizeCanvas);
+
+function sizeCanvas() { 
+  canvas.width = innerWidth; 
+  canvas.height = innerHeight; 
+}
+sizeCanvas(); 
+addEventListener('resize', sizeCanvas);
 
 const letters = "01";
-let fontSize = 14;
+let fontSize = 16;
 let columns = Math.floor(canvas.width / fontSize);
-let drops = Array.from({length: columns}, () => 1);
+let drops = Array.from({ length: columns }, () => 1);
 
-function drawMatrix(){
-  ctx.fillStyle = "rgba(0,0,0,0.05)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "#0f0";
+function drawMatrix() {
+  // ব্যাকগ্রাউন্ড ধীরে ধীরে clear হবে -> ghostly fade effect
+  ctx.fillStyle = "rgba(0,0,0,0.05)";  
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // অক্ষরগুলো হালকা সবুজ
+  ctx.fillStyle = "rgba(0,255,0,0.25)"; 
   ctx.font = fontSize + "px monospace";
-  for (let i=0;i<drops.length;i++){
-    const text = letters[Math.floor(Math.random()*letters.length)];
-    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-    if (drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    // Random reset
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) {
+      drops[i] = 0;
+    }
+    drops[i] += 0.5; // ধীরে নামবে
   }
 }
-setInterval(drawMatrix, 33);
+
+// Slow motion (প্রতি 120ms এ update হবে)
+setInterval(drawMatrix, 120);
 
 /* ========= Fake Hacker Code Stream ========= */
 const codeStream = document.getElementById('code-stream');
